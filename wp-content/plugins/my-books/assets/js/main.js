@@ -26,6 +26,7 @@
             var category = $('#formAddBook #book-cat').val();
             var about = $('#formAddBook #about').val();
             var book_image = $("#formAddBook #image_name").val();
+            var book_link = $("#formAddBook #book-link").val();
             // console.log(name);
             // console.log(author);
             // console.log(category);
@@ -42,7 +43,8 @@
                     name:name,
                     about:about,
                     book_image: book_image,
-                    category: category
+                    category: category,
+                    link:book_link
                 },
                 success:function(res){
                    var  data= res.data;
@@ -71,6 +73,7 @@
             var about = $('#editabout').val();
             var book_image = $("#editimage_name").val();
             var category_id = $('#formEditBook #book-cat').val();
+            var link = $('#formEditBook #book-link').val();
             $.ajax({
                 type : "post", //Phương thức truyền post hoặc get
                 dataType : "json", //Dạng dữ liệu trả về xml, json, script, or html
@@ -83,7 +86,8 @@
                     editname:name,
                     editabout:about,
                     editbook_image: book_image,
-                    category_id:category_id
+                    category_id:category_id,
+                    link:link
                 },
                 success:function(res){
                     // console.log(res);
@@ -262,6 +266,38 @@
                 })
             }    
         });
+
+        $(document).on('click','.pagination .page-link',function (e){
+            e.preventDefault();
+            console.log("object");
+            var number = $(this).data("number");
+            console.log( number );
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                async: true,
+                url: ajax_url,
+                data: {
+                    action:'bookajax',
+                    number: number,
+                    // pass: pass,
+                },
+                beforeSend: function () {
+                },
+                success: function (response) {
+                    console.log(response);
+                    $('.book-page .row').html(response.data)
+                    // $('html, body').animate({
+                    //     scrollTop: $(".book-page .container").offset().top
+                    // }, 1000);
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    //Làm gì đó khi có lỗi xảy ra
+                    console.log('The following error occured: ' + textStatus, errorThrown);
+                }
+            })
+        })
     });
 
 })( jQuery );

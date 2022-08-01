@@ -37,6 +37,12 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
+                        <label class="col-form-label col-sm-2" for="book-link">Link book</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"  value="<?php echo $book_detail->link;?>" name="book-link" id="book-link" placeholder="Enter Book Link" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
                         <label class="col-form-label col-sm-2" for="author">Category</label>
                         <div class="col-sm-10">
                             <select name="book-cat" id="book-cat" class="form-select form-select-lg mb-3">

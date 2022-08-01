@@ -29,6 +29,7 @@
                         <th>Sr No</th>
                         <th>Name</th>
                         <th>Author</th>
+                        <th>Link</th>
                         <th>Category</th>
                         <th>About</th>
                         <th>Book Image</th>
@@ -55,6 +56,7 @@
                                         <td><?php echo $i++; ?></td>
                                         <td><?php echo $value['name']; ?></td>
                                         <td><?php echo $value["author"]; ?></td>
+                                        <td><?php echo $value["link"]; ?></td>
                                         <td><?php echo $bookget_catName->name; ?></td>
                                         <td><?php echo wp_trim_words($value["about"],20); ?></td>
                                         <td>
