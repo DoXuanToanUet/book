@@ -1,0 +1,4 @@
+#adminmenu a[href="admin.php?page=book-edit"], #adminmenu a[href="admin.php?page=cat-edit"] {
+  display: none;
+}
+/*# sourceMappingURL=bookadmin.css.map */

@@ -63,7 +63,6 @@
         })
 
         $('#formEditBook').submit(function(e){
-           
 
             console.log("form edit");
             e.preventDefault();
@@ -71,6 +70,7 @@
             var author = $('#editauthor').val();
             var about = $('#editabout').val();
             var book_image = $("#editimage_name").val();
+            var category_id = $('#formEditBook #book-cat').val();
             $.ajax({
                 type : "post", //Phương thức truyền post hoặc get
                 dataType : "json", //Dạng dữ liệu trả về xml, json, script, or html
@@ -82,7 +82,8 @@
                     editauthor:author,
                     editname:name,
                     editabout:about,
-                    editbook_image: book_image
+                    editbook_image: book_image,
+                    category_id:category_id
                 },
                 success:function(res){
                     // console.log(res);
@@ -103,7 +104,38 @@
         var ajax_url = $("input[name='url_ajax']").val();
         var book_id = $("input[name='book_id']").val();
     
+        $('#formCatEdit').submit(function(e){
 
+            // console.log("form edit");
+            e.preventDefault();
+            var name = $('#editname').val();
+            var catid = $("input[name='cat_id']").val()
+            $.ajax({
+                type : "post", //Phương thức truyền post hoặc get
+                dataType : "json", //Dạng dữ liệu trả về xml, json, script, or html
+                url :ajax_url, 
+                data: {
+                    // param : 'edit_book',
+                    action: "cat_edit",
+                    editname:name,
+                    catid:catid
+                },
+                success:function(res){
+                    // console.log(res);
+                   var  data= res.data;
+
+                    if( data.status == 1){
+                        $('.bookadd_alert').show();
+                        $('.bookadd_alert_content').text(data.message);
+                        setTimeout(function(){
+                            $('.bookadd_alert').hide();
+                        },1000)
+                    }
+                    
+                }
+            })
+
+        })
 
         // delete table
         // $(document).on("click",".btnbookdelete",function(){
@@ -124,8 +156,6 @@
                            // param : 'edit_book',
                            action: "book_del",
                            delete_id: delete_id,
-                          
-                          
                        },
                        success:function(res){
                            // console.log(res);
@@ -137,9 +167,7 @@
                                setTimeout(function(){
                                    $('.bookadd_alert').hide();
                                },1000)
-                              
                            }
-                           
                        }
                    })
                    setTimeout(function(){

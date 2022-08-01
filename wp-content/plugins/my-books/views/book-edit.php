@@ -7,22 +7,21 @@
         $wpdb->prepare(
             "SELECT * from wp_my_books WHERE id = %d ",$book_id
             )
-        );
+    );
     // echo "<pre>";
     // print_r($book_detail);
     // echo "</pre>";   
 ?>
 <div class="container">
     <div class="row">
-        <div class="alert alert-info">
-            <h5>Book add page</h5>
+        <div class="alert text-center">
+            <h5>Edit book</h5>
         </div>
         <div class="alert alert-success alert-dismissible fade show bookadd_alert" role="alert">
             <strong class="bookadd_alert_content"></strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <div class="panel panel-primary">
-            <div class="panel-heading">Panel Heading</div>
             <div class="panel-body">
                 <form action="javascript:void(0)" id="formEditBook">
                     <div class="mb-3 row">
@@ -35,6 +34,32 @@
                         <label class="col-form-label col-sm-2" for="editauthor">Author</label>
                         <div class="col-sm-10">
                             <input type="text" value="<?php echo $book_detail->author;?>" class="form-control" name="editauthor" id="editauthor" placeholder="Enter Book Author" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-form-label col-sm-2" for="author">Category</label>
+                        <div class="col-sm-10">
+                            <select name="book-cat" id="book-cat" class="form-select form-select-lg mb-3">
+                                <option value="">--Choose Category</option>
+                                <?php 
+                                    global $wpdb;
+                                    $category_id = $book_detail->category_id;
+                                    // echo "<pre>";
+                                    // print_r($cat);
+                                    // echo "</pre>"; 
+                                   $getallcat =  $wpdb->get_results(
+                                        "SELECT * from ".my_book_category_table()." ORDER by id desc"
+                                    );
+                                    // echo "<pre>";
+                                    // print_r($getallcat);
+                                    // echo "</pre>";  
+                                    foreach($getallcat  as $index => $cat){
+                                        ?>
+                                            <option value="<?php echo $cat->id;?>" <?php if ( $category_id == $cat->id) echo "selected";?>><?php  echo $cat->name;?></option>
+                                        <?php 
+                                    }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3 row">

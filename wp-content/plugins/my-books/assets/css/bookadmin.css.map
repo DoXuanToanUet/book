@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC,CAAC,CAAA,AAAA,IAAC,CAAK,0BAA0B,AAA/B,GAAiC,UAAU,CAAC,CAAC,CAAA,AAAA,IAAC,CAAK,yBAAyB,AAA9B,EAAiC;EACxF,OAAO,EAAE,IAAI;CAChB",
+    "sources": [
+        "bookadmin.scss"
+    ],
+    "names": [],
+    "file": "bookadmin.css"
+}

@@ -3,9 +3,9 @@
     global $wpdb;
     $all_books = $wpdb->get_results(
 
-        $wpdb->prepare(
-            "SELECT * from  wp_my_books order by id desc" 
-        ),ARRAY_A 
+        // $wpdb->prepare(
+            ("SELECT * from  wp_my_books order by id desc"),ARRAY_A
+        // ),ARRAY_A 
     );
     // echo "<pre>";
     // print_r($all_books);
@@ -41,12 +41,21 @@
                         if (count ($all_books) >0){
                             $i=1;
                             foreach($all_books as $key => $value){
+                          
+                                    $bookget_catName = $wpdb->get_row(
+                                        $wpdb->prepare(
+                                            "SELECT * from wp_my_book_category WHERE id = %d ",$value["category_id"]
+                                            )
+                                    );
+                                    // echo "<pre>";
+                                    // print_r($bookget_catName);
+                                    // echo "</pre>";
                                 ?>
                                     <tr>
                                         <td><?php echo $i++; ?></td>
                                         <td><?php echo $value['name']; ?></td>
                                         <td><?php echo $value["author"]; ?></td>
-                                        <td><?php echo $value["category"]; ?></td>
+                                        <td><?php echo $bookget_catName->name; ?></td>
                                         <td><?php echo wp_trim_words($value["about"],20); ?></td>
                                         <td>
                                             <img src="<?php  echo $value["book_image"]; ?>" alt="" style="width:80px; height:80px; object-fit:cover;">
@@ -54,8 +63,10 @@
                                         </td>
                                         <td><?php echo $value["created_at"]; ?></td>
                                         <td>
-                                            <a class="btn btn-info" href="admin.php?page=book-edit&edit=<?php echo $value["id"];?>">Edit</a>
-                                            <p class="btn btn-danger btnbookdelete" href="" data-id="<?php echo $value["id"];?>">Delete</p>
+                                            <div class="d-flex">
+                                                <a class="btn btn-info btn-sm me-2" href="admin.php?page=book-edit&edit=<?php echo $value["id"];?>">Edit</a>
+                                                <a class="btn btn-danger  btn-sm btnbookdelete" href="" data-id="<?php echo $value["id"];?>">Delete</a>
+                                            </div>
                                         </td>
                                     </tr>    
                                 <?php

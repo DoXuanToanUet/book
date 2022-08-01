@@ -40,7 +40,7 @@
                                     echo "</pre>";  
                                     foreach($getallcat  as $index => $cat){
                                         ?>
-                                            <option value="<?php  echo $cat->name;?>"><?php  echo $cat->name;?></option>
+                                            <option value="<?php  echo $cat->id;?>"><?php  echo $cat->name;?></option>
                                         <?php 
                                     }
                                 ?>

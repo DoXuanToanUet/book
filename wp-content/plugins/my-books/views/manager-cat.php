@@ -3,9 +3,9 @@
     global $wpdb;
     $all_cats = $wpdb->get_results(
 
-        $wpdb->prepare(
+        // $wpdb->prepare(
             "SELECT * from ".my_book_category_table()." order by id desc" 
-        )
+        // )
     );
 ?>
 
@@ -45,8 +45,10 @@
                                         <td><?php //echo $value->about; ?></td> -->
                                         <td><?php echo $value->created_at; ?></td>
                                         <td>
-                                            <a class="btn btn-info" href="admin.php?page=book-edit&edit=<?php echo $value->id;?>">Edit</a>
-                                            <p class="btn btn-danger btnbookdelete" href="" data-id="<?php echo $value->id;?>">Delete</p>
+                                            <div class="d-flex">
+                                                <a class="btn btn-info btn-sm me-2" href="admin.php?page=cat-edit&edit=<?php echo $value->id;?>">Edit</a>
+                                                <a class="btn btn-danger btn-sm btncatdelete" href="" data-id="<?php echo $value->id;?>">Delete</a>
+                                            </div>
                                         </td>
                                     </tr>    
                                 <?php

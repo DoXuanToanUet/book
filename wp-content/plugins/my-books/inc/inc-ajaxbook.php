@@ -7,13 +7,15 @@ function book_edit_ajax(){
         $editname =(isset($_POST['editname']))? esc_attr($_POST['editname']) :'';
         $editabout =(isset($_POST['editabout']))? esc_attr($_POST['editabout']) :'';
         $editbook_image =(isset($_POST['editbook_image']))? esc_attr($_POST['editbook_image']) :'';
+        $editbook_cat=(isset($_POST['category_id']))? esc_attr($_POST['category_id']) :'';
         $book_id = (isset($_POST['book_id']))? esc_attr($_POST['book_id']) :'';
 
         $wpdb->update($wpdb->prefix."my_books",array(
             'name'=>$editname,
             'author'=> $editauthor,
             'about'=>  $editabout,
-            'book_image'=>  $editbook_image
+            'book_image'=>  $editbook_image,
+            'category_id' => $editbook_cat
             ),array(
                 'id'=>$book_id 
             )
@@ -25,7 +27,24 @@ function book_edit_ajax(){
         die();
 }
 
-
+add_action('wp_ajax_cat_edit','bookcat_edit_ajax');
+function bookcat_edit_ajax(){
+    global $wpdb;
+        
+        $editname =(isset($_POST['editname']))? esc_attr($_POST['editname']) :'';
+        $cat_id = (isset($_POST['catid']))? esc_attr($_POST['catid']) :'';
+        $wpdb->update($wpdb->prefix."my_book_category",array(
+            'name'=>$editname,
+            ),array(
+                'id'=>$cat_id 
+            )
+        );
+        wp_send_json_success(array(
+            "status"=> "1",
+            "message"=>"Edit Book update successfully"
+        ));
+        die();
+}
     // book del
     add_action('wp_ajax_book_del','book_del_ajax');
     function book_del_ajax(){
@@ -124,7 +143,7 @@ function book_edit_ajax(){
                     'name'=> $name,
                     'author'=> $author,
                     'about'=> $about,
-                    'category'=> $category,
+                    'category_id'=> $category,
                     'book_image'=> $book_image
                 ));
                 if($result>0){

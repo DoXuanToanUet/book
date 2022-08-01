@@ -65,13 +65,14 @@
         add_submenu_page("book-list", "Book List", "Book List", "manage_options", "book-list", "my_book_list");
         add_submenu_page("book-list", "Add New", "Add New", "manage_options", "book-add-new", "my_book_add");
         add_submenu_page("book-list", "", "", "manage_options", "book-edit", "my_book_edit");
+        add_submenu_page("book-list", "", "", "manage_options", "cat-edit", "my_cat_edit");
 
          /// my extended submenus
         add_submenu_page("book-list", "Add New Category", "Add New Category", "manage_options", "add-book-cat", "my_bookcat_add");
         add_submenu_page("book-list", "Manage Category", "Manage Category", "manage_options", "manage-book-cat", "manage_book_cat");
-        add_submenu_page("book-list", "Add New Student", "Add New Student", "manage_options", "add-student", "my_student_add");
-        add_submenu_page("book-list", "Manage Student", "Manage Student", "manage_options", "remove-student", "my_student_remove");
-        add_submenu_page("book-list", "Course Tracker", "Course Tracker", "manage_options", "course-tracker", "course_tracker");
+            // add_submenu_page("book-list", "Add New Student", "Add New Student", "manage_options", "add-student", "my_student_add");
+            // add_submenu_page("book-list", "Manage Student", "Manage Student", "manage_options", "remove-student", "my_student_remove");
+            // add_submenu_page("book-list", "Course Tracker", "Course Tracker", "manage_options", "course-tracker", "course_tracker");
     }
     add_action("admin_menu", "my_books_plugins_menu");
 
@@ -86,6 +87,8 @@
                 wp_enqueue_style( 'my-theme-settings' );  
             }
         } 
+        wp_register_style('book-admincss', MY_BOOK_PLUGIN_URL.'/assets/css/bookadmin.css');   
+        wp_enqueue_style( 'book-admincss' );  
     }
     add_action( 'admin_enqueue_scripts', 'my_admin_enqueue', 10 );
     //callback functions to menus and submenus
@@ -105,6 +108,10 @@
     }
     function manage_book_cat(){
         include_once MY_BOOK_PLUGIN_DIR_PATH . "/views/manager-cat.php";
+    }
+
+    function my_cat_edit() {
+        include_once MY_BOOK_PLUGIN_DIR_PATH . '/views/category-edit.php';
     }
     // function my_student_add(){
     //     include_once MY_BOOK_PLUGIN_DIR_PATH . "/views/student-add.php";
