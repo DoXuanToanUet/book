@@ -31,7 +31,7 @@ function book_edit_ajax(){
 add_action('wp_ajax_bookajax','bookajax_pagination');
 function bookajax_pagination(){
     global $wpdb;
-
+    global $user_ID;
     ob_start();
     $limit = 8;
     $all_books = $wpdb->get_results(

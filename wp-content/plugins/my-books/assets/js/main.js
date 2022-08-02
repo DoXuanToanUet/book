@@ -290,7 +290,7 @@
                     // $('html, body').animate({
                     //     scrollTop: $(".book-page .container").offset().top
                     // }, 1000);
-                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    $("html, body").animate({ scrollTop: 0 }, 200);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     //Làm gì đó khi có lỗi xảy ra
